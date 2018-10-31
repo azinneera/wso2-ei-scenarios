@@ -397,6 +397,9 @@ Outputs:
   ESBHttpsUrl:
     Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:8243', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:8243', !Ref 'AWS::NoValue']]
     Description: Private IP of the WSO2 Product Instance
+  WSO2PublicIP:
+    Value: !If [IsUnix, !Sub '${WSO2UnixInstance.PublicIp}', !If [IsWindows, !Sub '${WSO2WindowsInstance.PublicIp}', !Ref 'AWS::NoValue']]
+    Description: Private IP of the WSO2 Product Instance
   DatabaseHost:
     Value: !Sub '${WSO2DBInstance.Endpoint.Address}'
     Description: Database Host
