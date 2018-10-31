@@ -386,7 +386,7 @@ Resources:
         id: 5352b4e9-46ed-4a23-8bdc-bafc3666cbbd
 Outputs:
   MgtConsoleUrl:
-    Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:9443/carbon', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:9443/carbon', !Ref 'AWS::NoValue']]
+    Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}/carbon', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}/carbon', !Ref 'AWS::NoValue']]
     Description: Access URL of the Management Console
   CarbonServerUrl:
     Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:9443/services', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:9443/services', !Ref 'AWS::NoValue']]
