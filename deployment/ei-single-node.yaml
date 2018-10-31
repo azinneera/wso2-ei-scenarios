@@ -388,9 +388,15 @@ Outputs:
   WSO2MgtConsoleURL:
     Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:9443/carbon', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:9443/carbon', !Ref 'AWS::NoValue']]
     Description: Access URL of the Management Console
-  WSO2PublicIP:
-    Value: !If [IsUnix, !Sub '${WSO2UnixInstance.PublicIp}', !If [IsWindows, !Sub '${WSO2WindowsInstance.PublicIp}', !Ref 'AWS::NoValue']]
-    Description: Private IP of the WSO2 Product Instance
+  CarbonServerURL:
+    Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:9443/services', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:9443/services', !Ref 'AWS::NoValue']]
+    Description: Access URL of Admin Services
+  NHTTPURL:
+    Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:8280', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:8280', !Ref 'AWS::NoValue']]
+    Description: Access URL of NIO HTTP Endpoint
+  NHTTPSURL:
+    Value: !If [IsUnix, !Sub 'https://${WSO2UnixInstance.PublicDnsName}:8243', !If [IsWindows, !Sub 'https://${WSO2WindowsInstance.PublicDnsName}:8243', !Ref 'AWS::NoValue']]
+    Description: Access URL of the NIO HTTPS Endpoint
   DatabaseHost:
     Value: !Sub '${WSO2DBInstance.Endpoint.Address}'
     Description: Database Host
