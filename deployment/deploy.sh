@@ -48,6 +48,7 @@ PROP_HOST=WSO2PublicIP           #host IP
 PROP_INSTANCE_ID=WSO2InstanceId  #Physical ID (Resource ID) of WSO2 EC2 Instance
 PROP_PRODUCT_NAME=ProductName
 PROP_PRODUCT_VERSION=ProductVersion
+PROP_MGT_CONSOLE_URL=WSO2MgtConsoleURL
 
 #----------------------------------------------------------------------
 # getting data from databuckets
@@ -149,6 +150,21 @@ get_product_home() {
 
     echo $REM_DIR/storage/$PRODUCT_NAME-$PRODUCT_VERSION
 }
+wait_for_server_startup() {
+    max_attempts=100
+    attempt_counter=0
+
+    MGT_CONSOLE_URL="https://$host:9443/carbon"
+    until $(curl -k --output /dev/null --silent --head --fail $MGT_CONSOLE_URL); do
+       if [ ${attempt_counter} -eq ${max_attempts} ];then
+        echo "Max attempts reached"
+        exit 1
+       fi
+        printf '.'
+        attempt_counter=$(($attempt_counter+1))
+        sleep 5
+    done
+}
 
 PRODUCT_HOME=$(get_product_home)
 #----------------------------------------------------------------------
@@ -204,9 +220,7 @@ else
   ssh -o StrictHostKeyChecking=no -i ${key_pem} ${user}@${host} bash ${REM_DIR}/intg-test-runner.sh --wd ${REM_DIR}
   ssh -o StrictHostKeyChecking=no -i ${key_pem} ${user}@${host} bash ${PRODUCT_HOME}/bin/integrator.sh start
 
-  # wait for server start up
-  # TODO: curl and wait for response
-  sleep 60
-
 fi
+
+wait_for_server_startup
 ##script ends
