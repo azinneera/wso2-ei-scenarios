@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#This script clones the scenario-tests repository and execute the tests.
 repo='https://github.com/yasassri/product-ei-scenario-tests.git'
 TEST_DIR='product-ei-scenario-tests'
 DIR=$2
