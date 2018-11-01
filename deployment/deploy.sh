@@ -17,10 +17,8 @@
 set -e
 set -o xtrace
 
-
 echo "Running deploy.sh..."
 pwd
-
 
 DIR=$2
 DIR1=integration
