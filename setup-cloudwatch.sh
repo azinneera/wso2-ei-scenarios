@@ -1,5 +1,6 @@
 #!/bin/bash
-          
+set -o xtrace
+
 echo "==============================================================="
 export PRODUCT_HOME="/opt/testgrid/test-product"
 mkdir -p $PRODUCT_HOME/repository/logs/
