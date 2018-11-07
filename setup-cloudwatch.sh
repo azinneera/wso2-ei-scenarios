@@ -9,8 +9,9 @@ curl https://s3.amazonaws.com//aws-cloudwatch/downloads/latest/awslogs-agent-set
 chmod +x ./awslogs-agent-setup.py
 curl https://raw.githubusercontent.com/azinneera/wso2-ei-scenarios/outputs-fix/cloudwatch-agent.config -O
 PYTHON=$(which python3)
-echo $PYTHON
-python awslogs-agent-setup.py -n -r us-east-1 -c cloudwatch-agent.config
+python --version
+python3 --version
+python3 awslogs-agent-setup.py -n -r us-east-1 -c cloudwatch-agent.config
                     
 echo "Hello World! 2" >> $PRODUCT_HOME/repository/logs/wso2carbon.log
 echo "==============================================================="
