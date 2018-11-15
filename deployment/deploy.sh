@@ -23,9 +23,8 @@ pwd
 DIR=$2
 DIR1=integration
 FILE1=${DIR}/infrastructure.properties
-FILE2=${DIR}/testplan-props.properties
 
-host="https"`grep -w "MgtConsoleUrl" ${FILE1} ${FILE2} | cut -d'=' -f2 | cut -d'\' -f2`
+host="https"`grep -w "MgtConsoleUrl" ${FILE1} | cut -d'=' -f2 | cut -d'\' -f2`
 
 CONNECT_RETRY_COUNT=20
 
@@ -50,3 +49,7 @@ wait_for_server_startup() {
 
 wait_for_server_startup
 
+INPUT_FILE=$2/infrastructure.properties
+OUTPUT_FILE=$4/deployment.properties
+
+cp $INPUT_FILE $OUTPUT_FILE
